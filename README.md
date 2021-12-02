@@ -1,4 +1,2 @@
-# MOG_Projekt
+# All The Way Down 
 
-TODO:
-Editor -> Force Text, sonst merge Konflikte
