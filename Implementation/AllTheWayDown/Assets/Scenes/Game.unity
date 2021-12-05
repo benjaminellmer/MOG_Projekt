@@ -153,7 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTiles:
-  - {fileID: 1004791930063258741, guid: c877781cdedf87b41b4513dc0d89fb98, type: 3}
+  - {fileID: 1004791930063258741, guid: 1fbf912cc570cda4386c7ee45e4cfd54, type: 3}
+  - {fileID: 1004791930063258741, guid: 11b0ab6e9f4e5c344b2707b2e3c65dee, type: 3}
+  - {fileID: 1004791930063258741, guid: d5a5b64c4228a974a89e0886a1472e3d, type: 3}
+  - {fileID: 1004791930063258741, guid: 513813cb840ddf24fb19d75b981f5392, type: 3}
 --- !u!4 &6846430
 Transform:
   m_ObjectHideFlags: 0
@@ -392,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionSped: 15
-  jumpForce: 10
+  jumpForce: 30
   forwardSpeed: 10
 --- !u!135 &2109734098
 SphereCollider:
