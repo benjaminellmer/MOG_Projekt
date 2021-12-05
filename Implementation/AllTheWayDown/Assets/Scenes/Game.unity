@@ -153,10 +153,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundTiles:
-  - {fileID: 1004791930063258741, guid: 1fbf912cc570cda4386c7ee45e4cfd54, type: 3}
+  - {fileID: 1004791930063258741, guid: 7f44c626b604f4340aebae7de85ed9e7, type: 3}
   - {fileID: 1004791930063258741, guid: 11b0ab6e9f4e5c344b2707b2e3c65dee, type: 3}
   - {fileID: 1004791930063258741, guid: d5a5b64c4228a974a89e0886a1472e3d, type: 3}
   - {fileID: 1004791930063258741, guid: 513813cb840ddf24fb19d75b981f5392, type: 3}
+  - {fileID: 1004791930063258741, guid: bbfc020f6c9b2c24fa09732c4186e294, type: 3}
+  nextIndex: 0
 --- !u!4 &6846430
 Transform:
   m_ObjectHideFlags: 0
