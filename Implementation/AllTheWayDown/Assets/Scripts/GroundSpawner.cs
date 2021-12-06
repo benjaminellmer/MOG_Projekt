@@ -20,6 +20,7 @@ public class GroundSpawner : MonoBehaviour
     private void Start()
     {
         SpawnTile(0);
+        SpawnTile(1);
         SpawnTile(3);
     }
 }
