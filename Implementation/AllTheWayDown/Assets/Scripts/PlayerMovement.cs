@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         player = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (debugOnPC)
         {
@@ -59,23 +59,25 @@ public class PlayerMovement : MonoBehaviour
 
         // scale to angle
         rawValueY = Mathf.Clamp(rawValueY / 90, -1, 1);
-
         rawValueY = applySensibility(rawValueY);
 
-        Debug.Log(Input.touchCount);
-
-
+        /* Movement system, using the rigidbody, is very buggy 
         Vector3 upsideMove = transform.up * 0;
         // Detect Jump
         if (Input.touchCount > 0)
         {
-            upsideMove = transform.up * jumpForce * Time.fixedDeltaTime;
+            upsideMove = transform.up * jumpForce * Time.deltaTime;
         }
 
-        // move body
-        Vector3 forwardMove = transform.forward * forwardSpeed * Time.fixedDeltaTime;
-        Vector3 sideMove = transform.right * rawValueY * directionSpeed * Time.fixedDeltaTime;
+        Vector3 forwardMove = transform.forward * forwardSpeed * Time.deltaTime;
+        Vector3 sideMove = transform.right * rawValueY * directionSpeed * Time.deltaTime;
         player.MovePosition(transform.position + forwardMove + sideMove + upsideMove);
+        */
+
+        float velY = player.velocity.y;
+        if (Input.touchCount > 0) velY = jumpForce;
+        
+        player.velocity = new Vector3(rawValueY * directionSpeed, velY, forwardSpeed);
     }
 
     /**
