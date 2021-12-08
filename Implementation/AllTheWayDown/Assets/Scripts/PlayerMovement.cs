@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody player;
     [SerializeField] private float directionSpeed = 50f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 25f;
     [SerializeField] private float forwardSpeed = 5f;
     [SerializeField] private float sensibility = 30;
+    
+    private bool grounded = false;
 
     // set to true, if the movement using <- -> and a d should be available
     [SerializeField] private bool debugOnPC = false;
@@ -59,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         // scale to angle
         rawValueY = Mathf.Clamp(rawValueY / 90, -1, 1);
-        rawValueY = applySensibility(rawValueY);
+        rawValueY = ApplySensibility(rawValueY);
 
         /* Movement system, using the rigidbody, is very buggy 
         Vector3 upsideMove = transform.up * 0;
@@ -75,7 +77,8 @@ public class PlayerMovement : MonoBehaviour
         */
 
         float velY = player.velocity.y;
-        if (Input.touchCount > 0) velY = jumpForce;
+        
+        if (grounded && Input.touchCount > 0) velY = jumpForce;
         
         player.velocity = new Vector3(rawValueY * directionSpeed, velY, forwardSpeed);
     }
@@ -84,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
      * The sensibility defines the value at, which the whole directional speed should be applied.
      * If the sensibility is 30 the whole directional speed is applied if the phone is tilted 30 degrees.
      */
-    private float applySensibility(float value)
+    private float ApplySensibility(float value)
     {
         // to avoid DivideByZero
         if (value == 0) return 0;
@@ -97,5 +100,21 @@ public class PlayerMovement : MonoBehaviour
         if (value < -1) value = -1;
 
         return value;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("Ground"))
+        {
+            grounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+        }
     }
 }

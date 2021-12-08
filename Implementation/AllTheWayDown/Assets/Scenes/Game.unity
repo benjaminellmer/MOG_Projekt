@@ -883,7 +883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionSpeed: 10
-  jumpForce: 10
+  jumpForce: 30
   forwardSpeed: 10
   sensibility: 30
   debugOnPC: 0
