@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,8 +11,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 25f;
     [SerializeField] private float forwardSpeed = 5f;
     [SerializeField] private float sensibility = 30;
-    
-    private bool grounded = false;
+
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask ground;
+
+    private bool jumping = false;
+    private float jumpTime = 0;
 
     // set to true, if the movement using <- -> and a d should be available
     [SerializeField] private bool debugOnPC = false;
@@ -26,6 +31,15 @@ public class PlayerMovement : MonoBehaviour
         if (debugOnPC)
         {
             HandleMovementWithKeyboard();
+            if (jumping)
+            {
+                Debug.Log("Player is jumping since " + jumpTime);
+            }
+
+            if (PlayerIsGrounded())
+            {
+                Debug.Log("Player is touching the ground");
+            }
         }
         else
         {
@@ -36,13 +50,32 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovementWithKeyboard()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        player.velocity = new Vector3(horizontalInput * directionSpeed, player.velocity.y, forwardSpeed);
 
-        // TODO: Check if the player is already jumping, should only be possible to jump, if the player touches the collider of the ground
-        if (Input.GetButtonDown("Jump"))
+        if (jumping) jumpTime += Time.deltaTime;
+
+        float velX = horizontalInput * directionSpeed;
+        float velY = player.velocity.y;
+        float velZ = forwardSpeed;
+        
+        if (PlayerIsGrounded())
         {
-            player.velocity = new Vector3(horizontalInput * directionSpeed, jumpForce, forwardSpeed);
+            if (!JumpJustStarted())
+            {
+                jumping = false;
+                jumpTime = 0;
+            }
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                velY = jumpForce;
+                jumping = true;
+            }
         }
+        else
+        {
+            if (!jumping) velZ = 0;
+        }
+        player.velocity = new Vector3(velX, velY, velZ);
     }
 
     void HandleMovementWithGyroscope()
@@ -77,10 +110,15 @@ public class PlayerMovement : MonoBehaviour
         */
 
         float velY = player.velocity.y;
-        
-        if (grounded && Input.touchCount > 0) velY = jumpForce;
-        
-        player.velocity = new Vector3(rawValueY * directionSpeed, velY, forwardSpeed);
+
+        if (PlayerIsGrounded() && Input.touchCount > 0)
+        {
+            jumping = true;
+            velY = jumpForce;
+        }
+
+        float fwd = (!PlayerIsGrounded() && !jumping) ? forwardSpeed : 0f;
+        player.velocity = new Vector3(rawValueY * directionSpeed, velY, fwd);
     }
 
     /**
@@ -101,20 +139,24 @@ public class PlayerMovement : MonoBehaviour
 
         return value;
     }
-
-    private void OnCollisionEnter(Collision other)
+    
+    /*
+     * This function checks if the player is touching the ground (a element with the ground layer)
+     */
+    private bool PlayerIsGrounded()
     {
-        if(other.gameObject.CompareTag("Ground"))
-        {
-            grounded = true;
-        }
+        // 1.1f is the radius of the player sphere + 0.1!
+        return Physics.CheckSphere(groundCheck.position, 0.6f, ground);
     }
 
-    private void OnCollisionExit(Collision other)
+    /*
+     * This function is used, to check if the player just initialized the jump.
+     * The problem with PlayerIsGrounded is, that it can be true the first frames after the jump
+     * was initialized, therefore it is checked if the jump action is longer ago then 0.3 seconds
+     */
+    private bool JumpJustStarted()
     {
-        if (other.gameObject.CompareTag("Ground"))
-        {
-            grounded = false;
-        }
+        return jumpTime < 0.3;
     }
+    
 }

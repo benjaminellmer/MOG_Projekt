@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6509471909118371141}
   - component: {fileID: 1750622494119513056}
   - component: {fileID: 8188306174589517353}
-  m_Layer: 0
+  - component: {fileID: 5069785254888979400}
+  m_Layer: 6
   m_Name: Cube_Bridge
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +97,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: fbe9d2f7dc9747646b74b7cade990305, type: 3}
+--- !u!65 &5069785254888979400
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633966109855850641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0287614, y: 0.52149355, z: 1.9999998}
+  m_Center: {x: -0.000000059604645, y: 1.7299709, z: -0.00000008940697}
