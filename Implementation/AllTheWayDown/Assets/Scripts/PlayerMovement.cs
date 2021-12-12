@@ -31,15 +31,6 @@ public class PlayerMovement : MonoBehaviour
         if (debugOnPC)
         {
             HandleMovementWithKeyboard();
-            if (jumping)
-            {
-                Debug.Log("Player is jumping since " + jumpTime);
-            }
-
-            if (PlayerIsGrounded())
-            {
-                Debug.Log("Player is touching the ground");
-            }
         }
         else
         {
@@ -50,32 +41,7 @@ public class PlayerMovement : MonoBehaviour
     void HandleMovementWithKeyboard()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-
-        if (jumping) jumpTime += Time.deltaTime;
-
-        float velX = horizontalInput * directionSpeed;
-        float velY = player.velocity.y;
-        float velZ = forwardSpeed;
-        
-        if (PlayerIsGrounded())
-        {
-            if (!JumpJustStarted())
-            {
-                jumping = false;
-                jumpTime = 0;
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                velY = jumpForce;
-                jumping = true;
-            }
-        }
-        else
-        {
-            if (!jumping) velZ = 0;
-        }
-        player.velocity = new Vector3(velX, velY, velZ);
+        MovePlayer(horizontalInput, Input.GetButtonDown("Jump"));
     }
 
     void HandleMovementWithGyroscope()
@@ -95,30 +61,38 @@ public class PlayerMovement : MonoBehaviour
         // scale to angle
         rawValueY = Mathf.Clamp(rawValueY / 90, -1, 1);
         rawValueY = ApplySensibility(rawValueY);
+        
+        MovePlayer(rawValueY, Input.touchCount > 0);
+    }
 
-        /* Movement system, using the rigidbody, is very buggy 
-        Vector3 upsideMove = transform.up * 0;
-        // Detect Jump
-        if (Input.touchCount > 0)
-        {
-            upsideMove = transform.up * jumpForce * Time.deltaTime;
-        }
+    void MovePlayer(float horizontalInput, bool jumpActive)
+    {
 
-        Vector3 forwardMove = transform.forward * forwardSpeed * Time.deltaTime;
-        Vector3 sideMove = transform.right * rawValueY * directionSpeed * Time.deltaTime;
-        player.MovePosition(transform.position + forwardMove + sideMove + upsideMove);
-        */
+        if (jumping) jumpTime += Time.deltaTime;
 
+        float velX = horizontalInput * directionSpeed;
         float velY = player.velocity.y;
-
-        if (PlayerIsGrounded() && Input.touchCount > 0)
+        float velZ = forwardSpeed;
+        
+        if (PlayerIsGrounded())
         {
-            jumping = true;
-            velY = jumpForce;
-        }
+            if (!JumpJustStarted())
+            {
+                jumping = false;
+                jumpTime = 0;
+            }
 
-        float fwd = (!PlayerIsGrounded() && !jumping) ? forwardSpeed : 0f;
-        player.velocity = new Vector3(rawValueY * directionSpeed, velY, fwd);
+            if (jumpActive)
+            {
+                velY = jumpForce;
+                jumping = true;
+            }
+        }
+        else
+        {
+            if (!jumping) velZ = 0;
+        }
+        player.velocity = new Vector3(velX, velY, velZ);
     }
 
     /**
