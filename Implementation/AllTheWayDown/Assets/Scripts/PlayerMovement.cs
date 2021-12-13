@@ -90,7 +90,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (!jumping) velZ = 0;
+            if (!jumping)
+            {
+                velZ = 3;
+                velX = 0;
+            }
         }
         player.velocity = new Vector3(velX, velY, velZ);
     }
@@ -119,8 +123,7 @@ public class PlayerMovement : MonoBehaviour
      */
     private bool PlayerIsGrounded()
     {
-        // 1.1f is the radius of the player sphere + 0.1!
-        return Physics.CheckSphere(groundCheck.position, 0.6f, ground);
+        return Physics.CheckSphere(groundCheck.position, 0.45f, ground);
     }
 
     /*
