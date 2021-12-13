@@ -13,17 +13,18 @@ public class GroundTile : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.transform.rotation = this.gameObject.transform.rotation;
+        other.gameObject.transform.rotation = gameObject.transform.rotation;
     }
 
     private void OnTriggerExit(Collider other)
     {
+        GameManager.inst.IncTiles();
         int index = Random.Range(0, groundSpawner.groundTiles.Length);
         while (index == groundSpawner.nextIndex)
         {
             index = Random.Range(0, groundSpawner.groundTiles.Length);
         }
         groundSpawner.SpawnTile(index);
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 5f);
     }
 }

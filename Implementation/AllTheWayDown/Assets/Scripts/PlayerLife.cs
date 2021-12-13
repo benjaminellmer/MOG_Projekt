@@ -31,6 +31,7 @@ public class PlayerLife : MonoBehaviour
 
     void Die()
     {
+        GameManager.inst.FreezeTiles();
         Invoke(nameof(ReloadLevel), 1f);
         playerDead = true;
     }

@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
      */
     private bool PlayerIsGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, 0.45f, ground);
+        return Physics.CheckSphere(groundCheck.position, 0.4f, ground);
     }
 
     /*
