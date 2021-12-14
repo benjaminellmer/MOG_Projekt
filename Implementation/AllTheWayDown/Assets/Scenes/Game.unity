@@ -158,6 +158,7 @@ MonoBehaviour:
   - {fileID: 1004791930063258741, guid: d5a5b64c4228a974a89e0886a1472e3d, type: 3}
   - {fileID: 1004791930063258741, guid: 513813cb840ddf24fb19d75b981f5392, type: 3}
   - {fileID: 1004791930063258741, guid: bbfc020f6c9b2c24fa09732c4186e294, type: 3}
+  - {fileID: 1004791930063258741, guid: c3e5b42197e51ec4aa48bbc61894ab95, type: 3}
   nextIndex: 0
 --- !u!4 &6846430
 Transform:
