@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody player;
+    private Rigidbody rb;
     [SerializeField] private float directionSpeed = 50f;
     [SerializeField] private float jumpForce = 25f;
     [SerializeField] private float forwardSpeed = 5f;
@@ -15,19 +15,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask ground;
 
-    private bool jumping = false;
-    private float jumpTime = 0;
-
     // set to true, if the movement using <- -> and a d should be available
     [SerializeField] private bool debugOnPC = false;
 
     void Start()
     {
-        player = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
+        //Debug.Log(transform.position.y);
         if (debugOnPC)
         {
             HandleMovementWithKeyboard();
@@ -67,36 +65,26 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer(float horizontalInput, bool jumpActive)
     {
-
-        if (jumping) jumpTime += Time.deltaTime;
-
-        float velX = horizontalInput * directionSpeed;
-        float velY = player.velocity.y;
-        float velZ = forwardSpeed;
+        var velX = horizontalInput * directionSpeed;
+        var velY = rb.velocity.y;
+        var velZ = forwardSpeed;
         
         if (PlayerIsGrounded())
         {
-            if (!JumpJustStarted())
-            {
-                jumping = false;
-                jumpTime = 0;
-            }
-
             if (jumpActive)
             {
                 velY = jumpForce;
-                jumping = true;
             }
         }
         else
         {
-            if (!jumping)
+            if (transform.position.y < 1)
             {
-                velZ = 3;
+                velZ = 0;
                 velX = 0;
             }
         }
-        player.velocity = new Vector3(velX, velY, velZ);
+        rb.velocity = new Vector3(velX, velY, velZ);
     }
 
     /**
@@ -119,21 +107,11 @@ public class PlayerMovement : MonoBehaviour
     }
     
     /*
-     * This function checks if the player is touching the ground (a element with the ground layer)
+     * This function checks if the rb is touching the ground (a element with the ground layer)
      */
     private bool PlayerIsGrounded()
     {
         return Physics.CheckSphere(groundCheck.position, 0.4f, ground);
     }
 
-    /*
-     * This function is used, to check if the player just initialized the jump.
-     * The problem with PlayerIsGrounded is, that it can be true the first frames after the jump
-     * was initialized, therefore it is checked if the jump action is longer ago then 0.3 seconds
-     */
-    private bool JumpJustStarted()
-    {
-        return jumpTime < 0.3;
-    }
-    
 }
