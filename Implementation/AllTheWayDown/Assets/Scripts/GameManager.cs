@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private bool freezeTiles = false;
-    private int score = 0;
+    private int coins = 0;
     private int tiles = 0;
     public static GameManager inst;
 
     [SerializeField] private Text tilesText;
+    [SerializeField] private Text coinsText;
 
     private void Awake()
     {
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
 
     public void IncScore()
     {
-        ++score;
+        ++coins;
+        coinsText.text = "Coins: " + coins;
     }
 
     public void IncTiles()
