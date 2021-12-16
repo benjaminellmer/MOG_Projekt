@@ -15,17 +15,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask ground;
 
+    [SerializeField] private bool calibrationMode = false;
+    private LayerMask calibrationBlock;
+    private float calibrationTime = 0;
+
     // set to true, if the movement using <- -> and a d should be available
     [SerializeField] private bool debugOnPC = false;
 
     void Start()
     {
+        calibrationBlock = LayerMask.GetMask("CalibrationBlock");
         rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        //Debug.Log(transform.position.y);
+        Debug.Log(Calibration.gyroOffsetY);
         if (debugOnPC)
         {
             HandleMovementWithKeyboard();
@@ -34,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleMovementWithGyroscope();
         }
+        //TODO: Touch steuerung mit touch und steuerung mit acceerometer
     }
 
     void HandleMovementWithKeyboard()
@@ -42,6 +48,14 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer(horizontalInput, Input.GetButtonDown("Jump"));
     }
 
+    void HandleMovementWithAccelerometer()
+    {
+    }
+
+    void HandleMovementWithTouch()
+    {
+    }
+    
     void HandleMovementWithGyroscope()
     {
         // Movement controls using the Gyroscope of the Phone
@@ -58,7 +72,10 @@ public class PlayerMovement : MonoBehaviour
 
         // scale to angle
         rawValueY = Mathf.Clamp(rawValueY / 90, -1, 1);
+        rawValueY -= Calibration.gyroOffsetY;
+        
         rawValueY = ApplySensibility(rawValueY);
+        if (Calibration.gyroMirrorControls) rawValueY *= -1;
         
         MovePlayer(rawValueY, Input.touchCount > 0);
     }
@@ -68,10 +85,10 @@ public class PlayerMovement : MonoBehaviour
         var velX = horizontalInput * directionSpeed;
         var velY = rb.velocity.y;
         var velZ = forwardSpeed;
-        
+
         if (PlayerIsGrounded())
         {
-            if (jumpActive)
+            if (jumpActive && calibrationMode == false)
             {
                 velY = jumpForce;
             }
@@ -84,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
                 velX = 0;
             }
         }
+
         rb.velocity = new Vector3(velX, velY, velZ);
     }
 
@@ -105,13 +123,19 @@ public class PlayerMovement : MonoBehaviour
 
         return value;
     }
-    
+
     /*
      * This function checks if the rb is touching the ground (a element with the ground layer)
      */
     private bool PlayerIsGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, 0.4f, ground);
+        bool result = Physics.CheckSphere(groundCheck.position, 0.4f, ground);
+        if (calibrationMode) return result || PlayerTouchesCalibrationBlock();
+        return result;
     }
 
+    private bool PlayerTouchesCalibrationBlock()
+    {
+        return Physics.CheckSphere(groundCheck.position, 0.4f, calibrationBlock);
+    }
 }
