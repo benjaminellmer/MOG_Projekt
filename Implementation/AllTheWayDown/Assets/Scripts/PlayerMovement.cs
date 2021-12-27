@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         {
             HandleMovementWithGyroscope();
         }
+        GameManager.inst.IncMeters(transform.position.z);
     }
 
     void HandleMovementWithKeyboard()

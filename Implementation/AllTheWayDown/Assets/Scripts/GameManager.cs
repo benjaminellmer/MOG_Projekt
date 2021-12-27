@@ -7,11 +7,13 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     private bool freezeTiles = false;
-    private int score = 0;
+    private int coins = 0;
     private int tiles = 0;
+    private int meters = 0;
     public static GameManager inst;
 
-    [SerializeField] private Text tilesText;
+    [SerializeField] private Text coinText;
+    [SerializeField] private Text meterText;
 
     private void Awake()
     {
@@ -20,7 +22,8 @@ public class GameManager : MonoBehaviour
 
     public void IncScore()
     {
-        ++score;
+        ++coins;
+        coinText.text = "" + coins;
     }
 
     public void IncTiles()
@@ -28,7 +31,6 @@ public class GameManager : MonoBehaviour
         if (!freezeTiles)
         {
             ++tiles;
-            tilesText.text = "" + tiles;
         }
     }
 
@@ -36,4 +38,11 @@ public class GameManager : MonoBehaviour
     {
         freezeTiles = true;
     }
+    
+    public void IncMeters(float distance)
+    {
+        meters = (int) distance/3;
+        meterText.text = "" + meters + "m";
+    }
+
 }
