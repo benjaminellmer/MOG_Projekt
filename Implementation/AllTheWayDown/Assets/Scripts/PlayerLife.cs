@@ -7,32 +7,37 @@ using UnityEngine.SceneManagement;
 public class PlayerLife : MonoBehaviour
 {
     private bool playerDead = false;
-    
+
     void Update()
     {
         if (!playerDead && PlayerFell())
         {
-            Die();
+            Die(false);
         }
         
     }
-
-    /* TODO: Check if player collided with water, die on collision
-    private void OnCollisionEnter(Collision other)
-    {
-        throw new NotImplementedException();
-    }
-    */
-
+    
+    /*
+     * Just an additional check, in case of problems with the water.
+     * In the normal case it should restart, because the player touches the water
+     */
     bool PlayerFell()
     {
-        return transform.position.y < -5;
+        return transform.position.y < -15;
     }
 
-    void Die()
+    void Die(bool instant)
     {
         GameManager.inst.FreezeTiles();
-        Invoke(nameof(ReloadLevel), 1f);
+        if (instant)
+        {
+            ReloadLevel();
+        }
+        else
+        {
+            Invoke(nameof(ReloadLevel), 1f);
+        }
+
         playerDead = true;
     }
 
@@ -40,5 +45,12 @@ public class PlayerLife : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            Die(true);
+        }
+    }
 }
