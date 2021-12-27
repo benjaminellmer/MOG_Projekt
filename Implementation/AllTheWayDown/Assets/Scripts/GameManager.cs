@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     private int meters = 0;
     public static GameManager inst;
 
+    public GameData gameData;
     [SerializeField] private Text coinText;
     [SerializeField] private Text meterText;
 
@@ -43,6 +45,25 @@ public class GameManager : MonoBehaviour
     {
         meters = (int) distance/3;
         meterText.text = "" + meters + "m";
+    }
+
+    public void QuitGame()
+    {
+        /*
+        var highScore = PlayerPrefs.GetInt("highScore", 0);
+        var totalCoins = PlayerPrefs.GetInt("coins", 0);
+        totalCoins += coins;
+        if (meters > highScore)
+        {
+            PlayerPrefs.SetInt("highScore", meters);
+        }
+        PlayerPrefs.SetInt("lastScore", meters);
+        PlayerPrefs.SetInt("totalCoins", totalCoins);
+        PlayerPrefs.Save();
+        */
+        gameData.setCoins(coins);
+        gameData.setMeters(meters);
+        SceneManager.LoadScene("Menu");
     }
 
 }

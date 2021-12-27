@@ -43,7 +43,7 @@ public class PlayerLife : MonoBehaviour
 
     void ReloadLevel()
     {
-        SceneManager.LoadScene("Menu");
+        GameManager.inst.QuitGame();
     }
 
     private void OnCollisionEnter(Collision collision)

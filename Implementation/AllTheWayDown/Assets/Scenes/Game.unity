@@ -1380,6 +1380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fd34e6a8221dc449d68193a8a3eb4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData: {fileID: 11400000, guid: fdf9cd6a77c460b489029bd9c59c5af2, type: 2}
   coinText: {fileID: 623269152}
   meterText: {fileID: 267636450}
 --- !u!1 &1809084788
