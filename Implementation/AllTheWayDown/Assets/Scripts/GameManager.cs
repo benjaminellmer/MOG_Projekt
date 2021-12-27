@@ -12,14 +12,26 @@ public class GameManager : MonoBehaviour
     private int tiles = 0;
     private int meters = 0;
     public static GameManager inst;
-
+    private int stage;
+    
+    private GameCamera gameCamera;
     public GameData gameData;
     [SerializeField] private Text coinText;
     [SerializeField] private Text meterText;
+    [SerializeField] private int maxStages = 1;
+    [SerializeField] private int tilesPerStage = 10;
 
     private void Awake()
     {
+        stage = gameData.getStartStage();
         inst = this;
+    }
+
+    private void Start()
+    {
+        Camera mainCamera = Camera.main;
+        gameCamera = mainCamera.GetComponent<GameCamera>();
+        gameCamera.hardTransition(stage);
     }
 
     public void IncScore()
@@ -33,6 +45,12 @@ public class GameManager : MonoBehaviour
         if (!freezeTiles)
         {
             ++tiles;
+        }
+
+        if (tiles >= tilesPerStage && stage < maxStages)
+        {
+            stage++;
+            gameCamera.initiateTransition(stage);
         }
     }
 
@@ -49,21 +67,14 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        /*
-        var highScore = PlayerPrefs.GetInt("highScore", 0);
-        var totalCoins = PlayerPrefs.GetInt("coins", 0);
-        totalCoins += coins;
-        if (meters > highScore)
-        {
-            PlayerPrefs.SetInt("highScore", meters);
-        }
-        PlayerPrefs.SetInt("lastScore", meters);
-        PlayerPrefs.SetInt("totalCoins", totalCoins);
-        PlayerPrefs.Save();
-        */
+        gameData.setTiles(tiles);
         gameData.setCoins(coins);
         gameData.setMeters(meters);
         SceneManager.LoadScene("Menu");
     }
 
+    public int getStage()
+    {
+        return stage;
+    }
 }

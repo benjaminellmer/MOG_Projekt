@@ -940,8 +940,9 @@ GameObject:
   - component: {fileID: 89073709}
   - component: {fileID: 89073711}
   - component: {fileID: 89073710}
+  - component: {fileID: 89073712}
   m_Layer: 5
-  m_Name: Image
+  m_Name: stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1004,6 +1005,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 89073708}
   m_CullTransparentMesh: 1
+--- !u!114 &89073712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89073708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6b493eb779b3c45a726afa8a2563ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playImage: {fileID: 21300000, guid: 7b7e1d9dc40c06c4cad83553decd5e12, type: 3}
+  lockImage: {fileID: 21300000, guid: 4a4730c6642ed3c479279c067f93c6f7, type: 3}
 --- !u!4 &95261936 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 246358358232986121, guid: cab60beb93ebf414394c567e58d74b66, type: 3}
@@ -4838,7 +4853,7 @@ GameObject:
   - component: {fileID: 635793070}
   - component: {fileID: 635793072}
   m_Layer: 5
-  m_Name: Image
+  m_Name: stage0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4910,9 +4925,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 635793068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a598877ed7249234dab133114c50a04c, type: 3}
+  m_Script: {fileID: 11500000, guid: be6b493eb779b3c45a726afa8a2563ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playImage: {fileID: 21300000, guid: 7f3f04ffc4a2e4a4e90e4b91bdc59d5e, type: 3}
+  lockImage: {fileID: 21300000, guid: 4a4730c6642ed3c479279c067f93c6f7, type: 3}
 --- !u!1001 &638417146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10163,6 +10180,8 @@ MonoBehaviour:
   scoreText: {fileID: 1816622429}
   highScoreText: {fileID: 570872613}
   scoreLabel: {fileID: 1670189125}
+  tilesPerStage: 15
+  maxStage: 1
 --- !u!4 &1295655515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1459792624, guid: e33537c4b4642ff4d851e65110d8838d, type: 3}

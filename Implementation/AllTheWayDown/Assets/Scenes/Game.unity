@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 43ae481cb4d859a40bf0982bb67cd042, type: 2}
   m_HaloStrength: 0.129
   m_FlareStrength: 0.515
   m_FlareFadeSpeed: 3
@@ -152,13 +152,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8be735fabe2ef41bc219ac5a1e5afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundTiles:
+  stage0:
   - {fileID: 1004791930063258741, guid: 7f44c626b604f4340aebae7de85ed9e7, type: 3}
   - {fileID: 1004791930063258741, guid: 11b0ab6e9f4e5c344b2707b2e3c65dee, type: 3}
   - {fileID: 1004791930063258741, guid: d5a5b64c4228a974a89e0886a1472e3d, type: 3}
   - {fileID: 1004791930063258741, guid: 513813cb840ddf24fb19d75b981f5392, type: 3}
   - {fileID: 1004791930063258741, guid: bbfc020f6c9b2c24fa09732c4186e294, type: 3}
   - {fileID: 1004791930063258741, guid: c3e5b42197e51ec4aa48bbc61894ab95, type: 3}
+  stage1:
+  - {fileID: 1004791930063258741, guid: 4114896672386f3449a3911873f040a7, type: 3}
+  - {fileID: 1004791930063258741, guid: bc49c2653086c334cba744ea30dc1de5, type: 3}
+  - {fileID: 1004791930063258741, guid: 2433300770029534bab47a47643f1df0, type: 3}
   nextIndex: 0
 --- !u!4 &6846430
 Transform:
@@ -300,15 +304,15 @@ RectTransform:
   m_GameObject: {fileID: 267636448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85832995, y: 0.85832995, z: 0.85832995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1369866901}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 98.5, y: -64.2}
-  m_SizeDelta: {x: 192.00003, y: 30}
+  m_AnchoredPosition: {x: 118, y: -75}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &267636450
 MonoBehaviour:
@@ -332,7 +336,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4a5ef07e36f6b1043a37df15cb460b5c, type: 3}
-    m_FontSize: 24
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -609,14 +613,14 @@ RectTransform:
   m_GameObject: {fileID: 502117150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85832995, y: 0.85832995, z: 0.85832995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1369866901}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25.75, y: -25.75}
+  m_AnchoredPosition: {x: 30, y: -30}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &502117152
@@ -684,14 +688,14 @@ RectTransform:
   m_GameObject: {fileID: 623269150}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85832995, y: 0.85832995, z: 0.85832995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1369866901}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 124.45834, y: -31.758362}
+  m_AnchoredPosition: {x: 145, y: -37}
   m_SizeDelta: {x: 192.00003, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &623269152
@@ -1252,6 +1256,7 @@ GameObject:
   - component: {fileID: 1460293225}
   - component: {fileID: 1460293224}
   - component: {fileID: 1460293227}
+  - component: {fileID: 1460293228}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1337,6 +1342,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2109734096}
+--- !u!114 &1460293228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460293223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed395d9cdc670840b62872d7ec32d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skybox: {fileID: 2100000, guid: 43ae481cb4d859a40bf0982bb67cd042, type: 2}
 --- !u!1 &1598127607
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,6 +1401,8 @@ MonoBehaviour:
   gameData: {fileID: 11400000, guid: fdf9cd6a77c460b489029bd9c59c5af2, type: 2}
   coinText: {fileID: 623269152}
   meterText: {fileID: 267636450}
+  maxStages: 1
+  tilesPerStage: 15
 --- !u!1 &1809084788
 GameObject:
   m_ObjectHideFlags: 0
