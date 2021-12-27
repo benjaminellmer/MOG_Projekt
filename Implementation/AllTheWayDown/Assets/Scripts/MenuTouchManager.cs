@@ -18,9 +18,6 @@ public class MenuTouchManager : MonoBehaviour
         dragDistance = Screen.height * 15 / 100;
         mainCamera = Camera.main;
         menuCamera = mainCamera.GetComponent<MenuCamera>();
-        print("Initialized");
-        Debug.Log("initialized");
-        //menuCamera.test();
     }
 
     // Update is called once per frame

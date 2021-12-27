@@ -47,5 +47,25 @@ public class GameData : ScriptableObject
     {
         this.highscore = highscore;
     }
-    
+
+    public void setStartStage(int stage)
+    {
+        this.startStage = stage;
+    }
+
+    public int getStartStage()
+    {
+        return startStage;
+    }
+
+    public int getTiles()
+    {
+        return tiles;
+    }
+
+    public void setTiles(int tiles)
+    {
+        this.tiles = tiles;
+    }
+
 }

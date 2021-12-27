@@ -9,11 +9,15 @@ public class MenuManager : MonoBehaviour
 
     public static MenuManager inst;
 
+    private MenuCamera menuCamera;
     public GameData gameData;
+    private int newStage = 0;
     [SerializeField] private Text coinText;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text highScoreText;
     [SerializeField] private Text scoreLabel;
+    [SerializeField] private int tilesPerStage = 5;
+    [SerializeField] private int maxStage = 1;
 
     private void Awake()
     {
@@ -22,7 +26,15 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        Camera mainCamera = Camera.main;
+        menuCamera = mainCamera.GetComponent<MenuCamera>();
         setScores();
+    }
+
+    public void startGame(int stage)
+    {
+        gameData.setStartStage(stage);
+        SceneManager.LoadScene("Game");
     }
 
     private void setScores()
@@ -65,7 +77,29 @@ public class MenuManager : MonoBehaviour
         coinText.text = totalCoins + "";
         PlayerPrefs.SetInt("coins", totalCoins);
         
+        //Check if a new stage was unlocked
+        var stage = PlayerPrefs.GetInt("stage", 0);
+        var tiles = gameData.getTiles() - 2;
+        var reachedStage = (int) tiles / tilesPerStage;
+        if (reachedStage > stage)
+        {
+            stage = reachedStage;
+            if (stage > maxStage)
+            {
+                stage = maxStage;
+            }
+            PlayerPrefs.SetInt("stage", stage);
+            //Transition camera
+            newStage = stage;
+            Invoke("TransitionCamera", .7f);
+        }
         //Save the prefs
         PlayerPrefs.Save();
+    }
+
+    private void TransitionCamera()
+    {
+        int moveBy = newStage * 30;
+        menuCamera.moveBy(moveBy);
     }
 }
