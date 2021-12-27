@@ -667,9 +667,10 @@ GameObject:
   - component: {fileID: 771809176}
   - component: {fileID: 771809175}
   - component: {fileID: 771809179}
-  m_Layer: 0
+  - component: {fileID: 771809180}
+  m_Layer: 4
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -766,6 +767,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2109734096}
+--- !u!64 &771809180
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771809174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 2b579f1f1acafbb48a33221255fa6bc0, type: 2}
 --- !u!1 &1039169953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1382,7 +1397,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  debugOnPC: 0
+  debugOnPC: 1
 --- !u!135 &2109734098
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1489,6 +1504,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c44b1782adb0cc4fb1b32c446f227de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
 --- !u!114 &2109734104
 MonoBehaviour:
   m_ObjectHideFlags: 0
