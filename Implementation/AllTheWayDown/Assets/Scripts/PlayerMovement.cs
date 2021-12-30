@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(transform.position.y);
+        //HandleMovementWithTouch();
         if (debugOnPC)
         {
             HandleMovementWithKeyboard();
@@ -42,6 +42,22 @@ public class PlayerMovement : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         MovePlayer(horizontalInput, Input.GetButtonDown("Jump"));
     }
+
+    void HandleMovementWithTouch()
+    {
+        float horizontalInput = 0;
+        bool jumping = false;
+        
+        if (Input.touchCount > 0)
+        {
+            horizontalInput = (Input.touches[0].position.x - 500) / 1000 * 2;
+            Debug.Log(horizontalInput);
+            jumping = Input.touches[0].tapCount > 1;
+            if (jumping) horizontalInput = 0;
+        }
+        
+        MovePlayer(horizontalInput, jumping);
+   }
 
     void HandleMovementWithGyroscope()
     {
