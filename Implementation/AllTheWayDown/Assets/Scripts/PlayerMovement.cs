@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // Fetch once at the beginning, so it does not have to be loaded from the player prefs, each frame
         inputMethod = ControlSettings.GetPreferredInputMethod();
-        Debug.Log("Fetched Input Method: " + PlayerPrefs.GetString("inputMethod"));
+        Debug.Log("Loaded Scene" + Random.Range(1, 100000));
     }
 
     private void Update()
@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
             switch (inputMethod)
             {
                 case ControlSettings.InputMethod.TOUCH:
-                    Debug.Log("Handling Touch");
                     HandleMovementWithTouch();
                     break;
                 case ControlSettings.InputMethod.GYROSCOPE:
@@ -41,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
                     else
                         HandleMovementWithAccelerometer(); 
                     */
-                    Debug.Log("Handling Touch");
                     HandleMovementWithGyroscope();
                     break;
                 case ControlSettings.InputMethod.ACCELEROMETER:
@@ -53,7 +51,6 @@ public class PlayerMovement : MonoBehaviour
                         HandleMovementWithTouch();
                     }
                     */
-                    Debug.Log("Handling Touch");
                     HandleMovementWithAccelerometer();
                     break;
             }
