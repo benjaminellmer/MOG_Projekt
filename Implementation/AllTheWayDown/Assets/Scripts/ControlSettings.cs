@@ -4,19 +4,26 @@ using UnityEngine;
 
 public static class ControlSettings
 {
-    public static InputMethod inputMethod = InputMethod.GYROSCOPE; // TODO: make private
-    private static bool gyroMirrored = false;
-
     public static InputMethod GetPreferredInputMethod()
     {
-        return inputMethod;
+        return PlayerPrefs.GetString("inputMethod", "gyro") switch
+        {
+            "gyro" => InputMethod.GYROSCOPE,
+            "acc" => InputMethod.ACCELEROMETER,
+            "touch" => InputMethod.TOUCH,
+            _ => InputMethod.GYROSCOPE
+        };
+    }
+
+    public static bool GetMirrorGyro()
+    {
+        return PlayerPrefs.GetInt("mirrorGyro", 0) == 1;
     }
 
     public enum InputMethod
     {
         GYROSCOPE,
         ACCELEROMETER,
-        TOUCH,
-        PC
+        TOUCH
     }
 }

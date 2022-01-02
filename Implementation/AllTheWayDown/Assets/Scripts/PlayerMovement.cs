@@ -11,46 +11,52 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask ground;
 
-    // set to true, if the movement using <- -> and a d should be available
     [SerializeField] private bool debugOnPC; // TODO: Delete
     private Rigidbody rb;
+    private ControlSettings.InputMethod inputMethod;
 
     private void Start()
     {
-        if (debugOnPC) ControlSettings.inputMethod = ControlSettings.InputMethod.PC; // ugly workaround
         rb = GetComponent<Rigidbody>();
+        // Fetch once at the beginning, so it does not have to be loaded from the player prefs, each frame
+        inputMethod = ControlSettings.GetPreferredInputMethod();
+        Debug.Log("Fetched Input Method: " + PlayerPrefs.GetString("inputMethod"));
     }
 
     private void Update()
     {
-        switch (ControlSettings.GetPreferredInputMethod())
+        if (debugOnPC) HandleMovementWithKeyboard();
+        else
         {
-            case ControlSettings.InputMethod.PC:
-                HandleMovementWithKeyboard();
-                break;
-            case ControlSettings.InputMethod.TOUCH:
-                HandleMovementWithTouch();
-                break;
-            case ControlSettings.InputMethod.GYROSCOPE:
-                /* Would be better, but does not work with unity remote
-                if (SystemInfo.supportsGyroscope)
-                    HandleMovementWithGyroscope();
-                else
-                    HandleMovementWithAccelerometer(); 
-                */
-                HandleMovementWithGyroscope();
-                break;
-            case ControlSettings.InputMethod.ACCELEROMETER:
-                /* Would be better, but does not work with unity remote
-                if (SystemInfo.supportsAccelerometer)
-                    HandleMovementWithAccelerometer();
-                else
-                {
+            switch (inputMethod)
+            {
+                case ControlSettings.InputMethod.TOUCH:
+                    Debug.Log("Handling Touch");
                     HandleMovementWithTouch();
-                }
-                */
-                HandleMovementWithAccelerometer();
-                break;
+                    break;
+                case ControlSettings.InputMethod.GYROSCOPE:
+                    /* Would be better, but does not work with unity remote
+                    if (SystemInfo.supportsGyroscope)
+                        HandleMovementWithGyroscope();
+                    else
+                        HandleMovementWithAccelerometer(); 
+                    */
+                    Debug.Log("Handling Touch");
+                    HandleMovementWithGyroscope();
+                    break;
+                case ControlSettings.InputMethod.ACCELEROMETER:
+                    /* Would be better, but does not work with unity remote
+                    if (SystemInfo.supportsAccelerometer)
+                        HandleMovementWithAccelerometer();
+                    else
+                    {
+                        HandleMovementWithTouch();
+                    }
+                    */
+                    Debug.Log("Handling Touch");
+                    HandleMovementWithAccelerometer();
+                    break;
+            }
         }
 
         GameManager.inst.IncMeters(transform.position.z);
