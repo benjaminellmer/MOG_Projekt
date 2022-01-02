@@ -1,70 +1,101 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody rb;
     [SerializeField] private float directionSpeed = 50f;
     [SerializeField] private float jumpForce = 25f;
     [SerializeField] private float forwardSpeed = 5f;
-    [SerializeField] private float sensibility = 30;
+    [SerializeField] private float gyroSensibility = 30;
+    [SerializeField] private float accSensibility = 50;
 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask ground;
 
     // set to true, if the movement using <- -> and a d should be available
-    [SerializeField] private bool debugOnPC = false;
+    [SerializeField] private bool debugOnPC; // TODO: Delete
+    private Rigidbody rb;
 
-    void Start()
+    private void Start()
     {
+        if (debugOnPC) ControlSettings.inputMethod = ControlSettings.InputMethod.PC; // ugly workaround
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
-        //HandleMovementWithTouch();
-        if (debugOnPC)
+        switch (ControlSettings.GetPreferredInputMethod())
         {
-            HandleMovementWithKeyboard();
+            case ControlSettings.InputMethod.PC:
+                HandleMovementWithKeyboard();
+                break;
+            case ControlSettings.InputMethod.TOUCH:
+                HandleMovementWithTouch();
+                break;
+            case ControlSettings.InputMethod.GYROSCOPE:
+                /* Would be better, but does not work with unity remote
+                if (SystemInfo.supportsGyroscope)
+                    HandleMovementWithGyroscope();
+                else
+                    HandleMovementWithAccelerometer(); 
+                */
+                HandleMovementWithGyroscope();
+                break;
+            case ControlSettings.InputMethod.ACCELEROMETER:
+                /* Would be better, but does not work with unity remote
+                if (SystemInfo.supportsAccelerometer)
+                    HandleMovementWithAccelerometer();
+                else
+                {
+                    HandleMovementWithTouch();
+                }
+                */
+                HandleMovementWithAccelerometer();
+                break;
         }
-        else
-        {
-            HandleMovementWithGyroscope();
-        }
+
         GameManager.inst.IncMeters(transform.position.z);
     }
 
-    void HandleMovementWithKeyboard()
+    private void HandleMovementWithKeyboard()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        var horizontalInput = Input.GetAxis("Horizontal");
         MovePlayer(horizontalInput, Input.GetButtonDown("Jump"));
     }
 
-    void HandleMovementWithTouch()
+    private void HandleMovementWithAccelerometer()
+    {
+        float horizontalInput = ApplySensibility(Input.acceleration.x, accSensibility);
+        MovePlayer(horizontalInput, Input.touchCount > 0);
+    }
+
+    private void HandleMovementWithTouch()
     {
         float horizontalInput = 0;
-        bool jumping = false;
-        
-        if (Input.touchCount > 0)
-        {
-            horizontalInput = (Input.touches[0].position.x - 500) / 1000 * 2;
-            Debug.Log(horizontalInput);
-            jumping = Input.touches[0].tapCount > 1;
-            if (jumping) horizontalInput = 0;
-        }
-        
-        MovePlayer(horizontalInput, jumping);
-   }
+        var jumping = false;
 
-    void HandleMovementWithGyroscope()
+        if (Input.touchCount > 0)
+            foreach (var touch in Input.touches)
+            {
+                if (touch.position.y < Screen.height / 3)
+                {
+                    horizontalInput = (Input.touches[0].position.x - 500) / 1000 * 2;
+                }
+                else
+                {
+                    jumping = true;
+                }
+            }
+
+        MovePlayer(horizontalInput, jumping);
+    }
+
+    private void HandleMovementWithGyroscope()
     {
         // Movement controls using the Gyroscope of the Phone
         // retrieved from: https://elearning.fh-ooe.at/pluginfile.php/486729/mod_resource/content/0/07_controls_notes.pdf slide 35
         Input.gyro.enabled = true;
         var yawPitchRoll = Input.gyro.attitude.eulerAngles;
+        Debug.Log(yawPitchRoll);
 
         // read angle in range [0, 360]
         var rawValueY = yawPitchRoll.y;
@@ -75,23 +106,20 @@ public class PlayerMovement : MonoBehaviour
 
         // scale to angle
         rawValueY = Mathf.Clamp(rawValueY / 90, -1, 1);
-        rawValueY = ApplySensibility(rawValueY);
-        
+        rawValueY = ApplySensibility(rawValueY, gyroSensibility);
+
         MovePlayer(rawValueY, Input.touchCount > 0);
     }
 
-    void MovePlayer(float horizontalInput, bool jumpActive)
+    private void MovePlayer(float horizontalInput, bool jumpActive)
     {
         var velX = horizontalInput * directionSpeed;
         var velY = rb.velocity.y;
         var velZ = forwardSpeed;
-        
+
         if (PlayerIsGrounded())
         {
-            if (jumpActive)
-            {
-                velY = jumpForce;
-            }
+            if (jumpActive) velY = jumpForce;
         }
         else
         {
@@ -101,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
                 velX = 0;
             }
         }
+
         rb.velocity = new Vector3(velX, velY, velZ);
     }
 
@@ -108,21 +137,21 @@ public class PlayerMovement : MonoBehaviour
      * The sensibility defines the value at, which the whole directional speed should be applied.
      * If the sensibility is 30 the whole directional speed is applied if the phone is tilted 30 degrees.
      */
-    private float ApplySensibility(float value)
+    private float ApplySensibility(float value, float sensibility)
     {
         // to avoid DivideByZero
         if (value == 0) return 0;
 
-        // The value should already be 1 at 30 degree rotation, therefore mutliply and then modify it again
+        // The value should already be 1 at 30 degree rotation, therefore multiply and then modify it again
         // 180deg = 1, per deg 0.005, 30 deg = 0.16, 0.16 should already be 1, therefore 6
-        float multiplier = 1 / (0.005f * sensibility);
+        var multiplier = 1 / (0.005f * sensibility);
         value *= multiplier;
         if (value > 1) value = 1;
         if (value < -1) value = -1;
 
         return value;
     }
-    
+
     /*
      * This function checks if the rb is touching the ground (a element with the ground layer)
      */
@@ -130,5 +159,4 @@ public class PlayerMovement : MonoBehaviour
     {
         return Physics.CheckSphere(groundCheck.position, 0.4f, ground);
     }
-
 }

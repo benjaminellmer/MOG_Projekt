@@ -4,9 +4,8 @@ using UnityEngine;
 
 public static class ControlSettings
 {
-    private static InputMethod inputMethod = InputMethod.TOUCH;
+    public static InputMethod inputMethod = InputMethod.GYROSCOPE; // TODO: make private
     private static bool gyroMirrored = false;
-    private static bool accMirrored = false;
 
     public static InputMethod GetPreferredInputMethod()
     {
@@ -15,6 +14,9 @@ public static class ControlSettings
 
     public enum InputMethod
     {
-        GYROROSPOCE, ACCELEROMETER, TOUCH
+        GYROSCOPE,
+        ACCELEROMETER,
+        TOUCH,
+        PC
     }
 }
