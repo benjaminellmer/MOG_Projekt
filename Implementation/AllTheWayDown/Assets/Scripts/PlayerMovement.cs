@@ -1,3 +1,4 @@
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,7 +21,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // Fetch once at the beginning, so it does not have to be loaded from the player prefs, each frame
         inputMethod = ControlSettings.GetPreferredInputMethod();
-        Debug.Log("Loaded Scene" + Random.Range(1, 100000));
+        if (inputMethod == ControlSettings.InputMethod.GYROSCOPE)
+        {
+            // Initialize gyroscope
+            Input.gyro.enabled = true;
+            Input.gyro.updateInterval = 1f / 60; // 60Hz
+        }
     }
 
     private void Update()
@@ -34,23 +40,9 @@ public class PlayerMovement : MonoBehaviour
                     HandleMovementWithTouch();
                     break;
                 case ControlSettings.InputMethod.GYROSCOPE:
-                    /* Would be better, but does not work with unity remote
-                    if (SystemInfo.supportsGyroscope)
-                        HandleMovementWithGyroscope();
-                    else
-                        HandleMovementWithAccelerometer(); 
-                    */
                     HandleMovementWithGyroscope();
                     break;
                 case ControlSettings.InputMethod.ACCELEROMETER:
-                    /* Would be better, but does not work with unity remote
-                    if (SystemInfo.supportsAccelerometer)
-                        HandleMovementWithAccelerometer();
-                    else
-                    {
-                        HandleMovementWithTouch();
-                    }
-                    */
                     HandleMovementWithAccelerometer();
                     break;
             }
@@ -96,9 +88,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Movement controls using the Gyroscope of the Phone
         // retrieved from: https://elearning.fh-ooe.at/pluginfile.php/486729/mod_resource/content/0/07_controls_notes.pdf slide 35
-        Input.gyro.enabled = true;
         var yawPitchRoll = Input.gyro.attitude.eulerAngles;
-        Debug.Log(yawPitchRoll);
 
         // read angle in range [0, 360]
         var rawValueY = yawPitchRoll.y;
@@ -110,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
         // scale to angle
         rawValueY = Mathf.Clamp(rawValueY / 90, -1, 1);
         rawValueY = ApplySensibility(rawValueY, gyroSensibility);
+
+        if (ControlSettings.GetMirrorGyro()) rawValueY *= -1;
 
         MovePlayer(rawValueY, Input.touchCount > 0);
     }

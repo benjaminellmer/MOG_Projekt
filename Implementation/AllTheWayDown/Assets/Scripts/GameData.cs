@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New GameData", menuName = "GameData")]
 public class GameData : ScriptableObject
 {
-    
     [SerializeField]
     private int startStage;
     [SerializeField]

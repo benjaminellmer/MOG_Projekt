@@ -1647,10 +1647,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfcd6e6a2f0e204f8b968ccdca41132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionSpeed: 10
+  directionSpeed: 5
   jumpForce: 12
-  forwardSpeed: 10
-  sensibility: 30
+  forwardSpeed: 5
+  gyroSensibility: 30
+  accSensibility: 50
   groundCheck: {fileID: 1809084789}
   ground:
     serializedVersion: 2

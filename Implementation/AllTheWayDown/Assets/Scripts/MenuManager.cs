@@ -37,6 +37,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene("ControlMenu");
+    }
+
     private void setScores()
     {
         //Get data from last run and total data
