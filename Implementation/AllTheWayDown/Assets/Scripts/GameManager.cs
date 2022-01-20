@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private int tiles = 0;
     private int meters = 0;
     public static GameManager inst;
-    private int stage;
+    private int stage = 0;
     
     private GameCamera gameCamera;
     public GameData gameData;

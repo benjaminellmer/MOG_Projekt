@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GroundSpawner : MonoBehaviour
 {
-    public GameObject[] stage0;
-    public GameObject[] stage1;
+    [SerializeField] private GameObject[] stage0;
+    [SerializeField] private GameObject[] stage1;
+    [SerializeField] private GameObject[] stage2;
     public GameObject[][] groundTiles;
     private Vector3 nextSpawnpoint;
     private Quaternion nextSpawnPointRotation;
@@ -13,21 +14,34 @@ public class GroundSpawner : MonoBehaviour
 
     public void SpawnTile(int stage, int index)
     {
-        GameObject temp = Instantiate(groundTiles[stage][index], nextSpawnpoint,  nextSpawnPointRotation);
-        nextIndex = index;
-        nextSpawnPointRotation = temp.transform.GetChild(0).rotation;
-        nextSpawnpoint = temp.transform.GetChild(0).transform.position;
+        if (stage < groundTiles.Length)
+        {
+            if (index < groundTiles[stage].Length)
+            {
+                GameObject temp = Instantiate(groundTiles[stage][index], nextSpawnpoint, nextSpawnPointRotation);
+                nextIndex = index;
+                nextSpawnPointRotation = temp.transform.GetChild(0).rotation;
+                nextSpawnpoint = temp.transform.GetChild(0).transform.position;
+            }
+            else
+            {
+                if (index != 0) SpawnTile(stage, --index);
+                else SpawnTile(--stage, index);
+            }
+        }
+        else if (stage != 0) SpawnTile(--stage, index);
     }
 
     private void Start()
     {
         var stage = GameManager.inst.getStage();
-        groundTiles = new GameObject[2][];
+        groundTiles = new GameObject[3][];
         groundTiles[0] = stage0;
         groundTiles[1] = stage1;
+        groundTiles[2] = stage2;
+        // index out of bounds are caught in SpawnTile
         SpawnTile(stage, 0);
         SpawnTile(stage, 1);
         SpawnTile(stage, 2);
     }
 }
-

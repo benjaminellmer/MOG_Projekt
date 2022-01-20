@@ -153,16 +153,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage0:
+  - {fileID: 1004791930063258741, guid: 82a49e0d59c9f4903a55aef6772a94ec, type: 3}
+  - {fileID: 1004791930063258741, guid: 7c89d88e830ec41e18386d8a0337f117, type: 3}
+  - {fileID: 1004791930063258741, guid: 7a456044f2e234ebe9628d8dde6663db, type: 3}
+  - {fileID: 1004791930063258741, guid: 24ff00268dadf4f7c8eb0cf99c985507, type: 3}
+  - {fileID: 1004791930063258741, guid: 67a95a37cb0ba40dab7be56056efdc5f, type: 3}
+  stage1:
   - {fileID: 1004791930063258741, guid: 7f44c626b604f4340aebae7de85ed9e7, type: 3}
   - {fileID: 1004791930063258741, guid: 11b0ab6e9f4e5c344b2707b2e3c65dee, type: 3}
   - {fileID: 1004791930063258741, guid: d5a5b64c4228a974a89e0886a1472e3d, type: 3}
   - {fileID: 1004791930063258741, guid: 513813cb840ddf24fb19d75b981f5392, type: 3}
   - {fileID: 1004791930063258741, guid: bbfc020f6c9b2c24fa09732c4186e294, type: 3}
   - {fileID: 1004791930063258741, guid: c3e5b42197e51ec4aa48bbc61894ab95, type: 3}
-  stage1:
+  stage2:
   - {fileID: 1004791930063258741, guid: 4114896672386f3449a3911873f040a7, type: 3}
-  - {fileID: 1004791930063258741, guid: bc49c2653086c334cba744ea30dc1de5, type: 3}
-  - {fileID: 1004791930063258741, guid: 2433300770029534bab47a47643f1df0, type: 3}
   nextIndex: 0
 --- !u!4 &6846430
 Transform:
@@ -1647,16 +1651,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfcd6e6a2f0e204f8b968ccdca41132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionSpeed: 5
+  directionSpeed: 10
   jumpForce: 12
-  forwardSpeed: 5
+  forwardSpeed: 10
   gyroSensibility: 30
   accSensibility: 50
   groundCheck: {fileID: 1809084789}
   ground:
     serializedVersion: 2
     m_Bits: 64
-  debugOnPC: 0
+  debugOnPC: 1
 --- !u!135 &2109734098
 SphereCollider:
   m_ObjectHideFlags: 0

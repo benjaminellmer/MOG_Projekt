@@ -20,11 +20,11 @@ public class GroundTile : MonoBehaviour
     {
         GameManager.inst.IncTiles();
         var stage = GameManager.inst.getStage();
-        int index = Random.Range(0, groundSpawner.groundTiles[stage].Length);
-        while (index == groundSpawner.nextIndex)
+        int index;
+        do
         {
             index = Random.Range(0, groundSpawner.groundTiles[stage].Length);
-        }
+        } while (index == groundSpawner.nextIndex);
         groundSpawner.SpawnTile(stage, index);
         Destroy(gameObject, 5f);
     }
