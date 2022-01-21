@@ -16,7 +16,7 @@ public class StartGame : MonoBehaviour, IPointerClickHandler
         switch (gameObject.name)
         {
             case "stage0": 
-                MenuManager.inst.startGame(0);
+                MenuManager.inst.startGame(2);
                 break;
             case "stage1":
                 if (stage >= 1)
