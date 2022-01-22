@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class DroppingCube : MonoBehaviour
 {
-    void Start()
+    private bool dropping;
+    private float dropSpeed = 5f;
+
+    private void Update()
     {
-        
+        if (dropping) transform.Translate(Vector3.down * Time.deltaTime * dropSpeed, Space.World);
+        if(transform.position.y < -10) gameObject.SetActive(false);
     }
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
+        if (other.gameObject.CompareTag("Player")) dropping = true;
     }
 }
