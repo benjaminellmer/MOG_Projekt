@@ -173,8 +173,11 @@ MonoBehaviour:
   stage2:
   - {fileID: 1004791930063258741, guid: 723ff583cd0d541149af68a2defbd974, type: 3}
   - {fileID: 1004791930063258741, guid: bc49c2653086c334cba744ea30dc1de5, type: 3}
-  - {fileID: 1004791930063258741, guid: 2433300770029534bab47a47643f1df0, type: 3}
   - {fileID: 1004791930063258741, guid: 11f18464c404246cb868b299ff4bbd6a, type: 3}
+  - {fileID: 1004791930063258741, guid: ec7701a61fa81c54eb7abe9553272e0a, type: 3}
+  - {fileID: 1004791930063258741, guid: 9134b33ac6412aa45bb9299955aaec7d, type: 3}
+  - {fileID: 1004791930063258741, guid: a2deaaecd3258db449f66cafe8c52f23, type: 3}
+  - {fileID: 1004791930063258741, guid: a1ffbab82335d2f47b12f50d16b32291, type: 3}
   nextIndex: 0
 --- !u!4 &6846430
 Transform:
@@ -1415,7 +1418,7 @@ MonoBehaviour:
   meterText: {fileID: 267636450}
   maxStages: 2
   tilesPerStage: 30
-  startingTiles: 2
+  startingTiles: 3
 --- !u!1 &1809084788
 GameObject:
   m_ObjectHideFlags: 0
