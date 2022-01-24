@@ -16,8 +16,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Text scoreText;
     [SerializeField] private Text highScoreText;
     [SerializeField] private Text scoreLabel;
-    [SerializeField] private int tilesPerStage = 5;
-    [SerializeField] private int maxStage = 1;
 
     private void Awake()
     {
@@ -83,16 +81,11 @@ public class MenuManager : MonoBehaviour
         PlayerPrefs.SetInt("coins", totalCoins);
         
         //Check if a new stage was unlocked
-        var stage = PlayerPrefs.GetInt("stage", 0);
-        var tiles = gameData.getTiles() - 2;
-        var reachedStage = (int) tiles / tilesPerStage;
+        var stage = PlayerPrefs.GetInt("stage", 1);
+        var reachedStage = gameData.getReachedStage();
         if (reachedStage > stage)
         {
             stage = reachedStage;
-            if (stage > maxStage)
-            {
-                stage = maxStage;
-            }
             PlayerPrefs.SetInt("stage", stage);
             //Transition camera
             newStage = stage;
@@ -104,7 +97,7 @@ public class MenuManager : MonoBehaviour
 
     private void TransitionCamera()
     {
-        int moveBy = newStage * 30;
+        int moveBy = (newStage-1) * 30;
         menuCamera.moveBy(moveBy);
     }
 }

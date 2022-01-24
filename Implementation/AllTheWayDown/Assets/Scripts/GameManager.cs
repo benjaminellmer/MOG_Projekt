@@ -18,8 +18,10 @@ public class GameManager : MonoBehaviour
     public GameData gameData;
     [SerializeField] private Text coinText;
     [SerializeField] private Text meterText;
-    [SerializeField] private int maxStages = 1;
-    [SerializeField] private int tilesPerStage = 10;
+    [SerializeField] private int maxStages = 2;
+    [SerializeField] private int tilesPerStage = 20;
+    [SerializeField] private int startingTiles = 3;
+    
 
     private void Awake()
     {
@@ -47,9 +49,11 @@ public class GameManager : MonoBehaviour
             ++tiles;
         }
 
-        if (tiles >= tilesPerStage && stage < maxStages)
+        if ((stage == 0 && tiles >= startingTiles) ||
+            (tiles >= tilesPerStage && stage < maxStages))
         {
             stage++;
+            tiles = 0;
             gameCamera.initiateTransition(stage);
         }
     }
@@ -67,7 +71,12 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        gameData.setTiles(tiles);
+        int reachedStage = stage;
+        if (tiles < 2)
+        {
+            reachedStage = stage - 1;
+        }
+        gameData.setReachedStage(reachedStage);
         gameData.setCoins(coins);
         gameData.setMeters(meters);
         SceneManager.LoadScene("Menu");

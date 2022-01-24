@@ -1408,8 +1408,9 @@ MonoBehaviour:
   gameData: {fileID: 11400000, guid: fdf9cd6a77c460b489029bd9c59c5af2, type: 2}
   coinText: {fileID: 623269152}
   meterText: {fileID: 267636450}
-  maxStages: 1
-  tilesPerStage: 15
+  maxStages: 2
+  tilesPerStage: 5
+  startingTiles: 2
 --- !u!1 &1809084788
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,9 +47,10 @@ public class GameCamera : MonoBehaviour
             case 0:
                 return 0.0f;
             case 1:
+                return 0.0f;
+            case 2:
                 return 0.8f;
         }
-
         return 0.0f;
     }
 }

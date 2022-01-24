@@ -16,6 +16,8 @@ public class GameData : ScriptableObject
     private int meters;
     [SerializeField]
     private int highscore;
+    [SerializeField]
+    private int reachedStage;
 
     public int getCoins()
     {
@@ -65,6 +67,16 @@ public class GameData : ScriptableObject
     public void setTiles(int tiles)
     {
         this.tiles = tiles;
+    }
+    
+    public int getReachedStage()
+    {
+        return reachedStage;
+    }
+
+    public void setReachedStage(int reachedStage)
+    {
+        this.reachedStage = reachedStage;
     }
 
 }
