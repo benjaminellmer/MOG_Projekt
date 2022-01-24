@@ -17,3 +17,4 @@ MonoBehaviour:
   coins: 0
   meters: 0
   highscore: 0
+  reachedStage: 0
