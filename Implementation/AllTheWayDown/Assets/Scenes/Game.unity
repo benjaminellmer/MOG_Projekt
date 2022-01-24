@@ -159,12 +159,17 @@ MonoBehaviour:
   - {fileID: 1004791930063258741, guid: 24ff00268dadf4f7c8eb0cf99c985507, type: 3}
   - {fileID: 1004791930063258741, guid: 67a95a37cb0ba40dab7be56056efdc5f, type: 3}
   stage1:
-  - {fileID: 1004791930063258741, guid: 7f44c626b604f4340aebae7de85ed9e7, type: 3}
+  - {fileID: 1004791930063258741, guid: 1c816f1ac573aef48bdab2ba8bab927d, type: 3}
   - {fileID: 1004791930063258741, guid: 11b0ab6e9f4e5c344b2707b2e3c65dee, type: 3}
   - {fileID: 1004791930063258741, guid: d5a5b64c4228a974a89e0886a1472e3d, type: 3}
   - {fileID: 1004791930063258741, guid: 513813cb840ddf24fb19d75b981f5392, type: 3}
   - {fileID: 1004791930063258741, guid: bbfc020f6c9b2c24fa09732c4186e294, type: 3}
   - {fileID: 1004791930063258741, guid: c3e5b42197e51ec4aa48bbc61894ab95, type: 3}
+  - {fileID: 1004791930063258741, guid: 1fbf912cc570cda4386c7ee45e4cfd54, type: 3}
+  - {fileID: 1004791930063258741, guid: 97dd66a0fe198c74ea758a92a7cb80d1, type: 3}
+  - {fileID: 1004791930063258741, guid: 313dc7ff6c2a52547b12f1e5817173c5, type: 3}
+  - {fileID: 1004791930063258741, guid: 7f44c626b604f4340aebae7de85ed9e7, type: 3}
+  - {fileID: 1004791930063258741, guid: c0e2544b35a078d4f932b5366648e24a, type: 3}
   stage2:
   - {fileID: 1004791930063258741, guid: 723ff583cd0d541149af68a2defbd974, type: 3}
   - {fileID: 1004791930063258741, guid: bc49c2653086c334cba744ea30dc1de5, type: 3}
@@ -1409,7 +1414,7 @@ MonoBehaviour:
   coinText: {fileID: 623269152}
   meterText: {fileID: 267636450}
   maxStages: 2
-  tilesPerStage: 5
+  tilesPerStage: 30
   startingTiles: 2
 --- !u!1 &1809084788
 GameObject:
@@ -1664,7 +1669,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  debugOnPC: 0
+  debugOnPC: 1
 --- !u!135 &2109734098
 SphereCollider:
   m_ObjectHideFlags: 0
