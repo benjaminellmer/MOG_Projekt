@@ -179,6 +179,8 @@ MonoBehaviour:
   - {fileID: 1004791930063258741, guid: a2deaaecd3258db449f66cafe8c52f23, type: 3}
   - {fileID: 1004791930063258741, guid: a1ffbab82335d2f47b12f50d16b32291, type: 3}
   nextIndex: 0
+  tempStage: 0
+  tempIndex: 0
 --- !u!4 &6846430
 Transform:
   m_ObjectHideFlags: 0
@@ -1417,7 +1419,7 @@ MonoBehaviour:
   coinText: {fileID: 623269152}
   meterText: {fileID: 267636450}
   maxStages: 2
-  tilesPerStage: 30
+  tilesPerStage: 8
   startingTiles: 3
 --- !u!1 &1809084788
 GameObject:
