@@ -8,10 +8,10 @@ public static class ControlSettings
     {
         return PlayerPrefs.GetString("inputMethod", "gyro") switch
         {
-            "gyro" => InputMethod.GYROSCOPE,
-            "acc" => InputMethod.ACCELEROMETER,
-            "touch" => InputMethod.TOUCH,
-            _ => InputMethod.GYROSCOPE
+            "gyro" => InputMethod.Gyroscope,
+            "acc" => InputMethod.Accelerometer,
+            "touch" => InputMethod.Touch,
+            _ => InputMethod.Gyroscope
         };
     }
 
@@ -22,8 +22,8 @@ public static class ControlSettings
 
     public enum InputMethod
     {
-        GYROSCOPE,
-        ACCELEROMETER,
-        TOUCH
+        Gyroscope,
+        Accelerometer,
+        Touch
     }
 }

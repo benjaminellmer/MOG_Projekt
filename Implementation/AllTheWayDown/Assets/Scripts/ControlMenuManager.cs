@@ -18,6 +18,7 @@ public class ControlMenuManager : MonoBehaviour
         accToggle.isOn = false;
         touchToggle.isOn = false;
         mirrorToggle.isOn = PlayerPrefs.GetInt("mirrorGyro", 0) == 1;
+        
         if (inputMethod.Equals("gyro"))
         {
             gyroToggle.isOn = true;

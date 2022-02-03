@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         // Fetch once at the beginning, so it does not have to be loaded from the player prefs, each frame
         inputMethod = ControlSettings.GetPreferredInputMethod();
-        if (inputMethod == ControlSettings.InputMethod.GYROSCOPE)
+        if (inputMethod == ControlSettings.InputMethod.Gyroscope)
         {
             // Initialize gyroscope
             Input.gyro.enabled = true;
@@ -36,13 +36,13 @@ public class PlayerMovement : MonoBehaviour
         {
             switch (inputMethod)
             {
-                case ControlSettings.InputMethod.TOUCH:
+                case ControlSettings.InputMethod.Touch:
                     HandleMovementWithTouch();
                     break;
-                case ControlSettings.InputMethod.GYROSCOPE:
+                case ControlSettings.InputMethod.Gyroscope:
                     HandleMovementWithGyroscope();
                     break;
-                case ControlSettings.InputMethod.ACCELEROMETER:
+                case ControlSettings.InputMethod.Accelerometer:
                     HandleMovementWithAccelerometer();
                     break;
             }

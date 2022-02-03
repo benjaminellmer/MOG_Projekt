@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        stage = gameData.getStartStage();
+        stage = gameData.GetStartStage();
         inst = this;
     }
 
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         Camera mainCamera = Camera.main;
         gameCamera = mainCamera.GetComponent<GameCamera>();
-        gameCamera.hardTransition(stage);
+        gameCamera.HardTransition(stage);
     }
 
     public void IncScore()
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         {
             stage++;
             tiles = 0;
-            gameCamera.initiateTransition(stage);
+            gameCamera.InitiateTransition(stage);
         }
     }
 
@@ -76,13 +76,13 @@ public class GameManager : MonoBehaviour
         {
             reachedStage = stage - 1;
         }
-        gameData.setReachedStage(reachedStage);
-        gameData.setCoins(coins);
-        gameData.setMeters(meters);
+        gameData.SetReachedStage(reachedStage);
+        gameData.SetCoins(coins);
+        gameData.SetMeters(meters);
         SceneManager.LoadScene("Menu");
     }
 
-    public int getStage()
+    public int GetStage()
     {
         return stage;
     }

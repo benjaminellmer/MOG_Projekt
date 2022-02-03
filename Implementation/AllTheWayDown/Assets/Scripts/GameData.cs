@@ -15,66 +15,66 @@ public class GameData : ScriptableObject
     [SerializeField]
     private int meters;
     [SerializeField]
-    private int highscore;
+    private int highScore;
     [SerializeField]
     private int reachedStage;
 
-    public int getCoins()
+    public int GetCoins()
     {
         return coins;
     }
 
-    public void setCoins(int coins)
+    public void SetCoins(int coins)
     {
         this.coins = coins;
     }
     
-    public int getMeters()
+    public int GetMeters()
     {
         return meters;
     }
 
-    public void setMeters(int meters)
+    public void SetMeters(int meters)
     {
         this.meters = meters;
     }
     
-    public int getHighscore()
+    public int GetHighScore()
     {
-        return highscore;
+        return highScore;
     }
 
-    public void setHighscore(int highscore)
+    public void SetHighScore(int highScore)
     {
-        this.highscore = highscore;
+        this.highScore = highScore;
     }
 
-    public void setStartStage(int stage)
+    public void SetStartStage(int stage)
     {
         this.startStage = stage;
     }
 
-    public int getStartStage()
+    public int GetStartStage()
     {
         return startStage;
     }
 
-    public int getTiles()
+    public int GetTiles()
     {
         return tiles;
     }
 
-    public void setTiles(int tiles)
+    public void SetTiles(int tiles)
     {
         this.tiles = tiles;
     }
     
-    public int getReachedStage()
+    public int GetReachedStage()
     {
         return reachedStage;
     }
 
-    public void setReachedStage(int reachedStage)
+    public void SetReachedStage(int reachedStage)
     {
         this.reachedStage = reachedStage;
     }

@@ -24,12 +24,12 @@ public class MenuCamera : MonoBehaviour
             transform.position = Vector3.MoveTowards(currentPosition, endPosition, 25 * Time.deltaTime);
         }
 
-        float skyBoxValue = map(currentPosition.x, 0f, 30f, 0f, 0.8f);
+        float skyBoxValue = Map(currentPosition.x, 0f, 30f, 0f, 0.8f);
         skybox.SetFloat("_CubemapTransition", skyBoxValue);
         DynamicGI.UpdateEnvironment();
     }
 
-    public void moveBy(int value)
+    public void MoveBy(int value)
     {
         float newX = endPosition.x + value;
         if (newX >= 0 && newX <= 30)
@@ -38,7 +38,7 @@ public class MenuCamera : MonoBehaviour
         }
     }
 
-    float map(float s, float a1, float a2, float b1, float b2)
+    float Map(float s, float a1, float a2, float b1, float b2)
     {
         return b1 + (s-a1)*(b2-b1)/(a2-a1);
     }

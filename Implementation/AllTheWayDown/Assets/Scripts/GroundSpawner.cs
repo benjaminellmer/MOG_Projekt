@@ -34,7 +34,7 @@ public class GroundSpawner : MonoBehaviour
 
     private void Start()
     {
-        var stage = GameManager.inst.getStage();
+        var stage = GameManager.inst.GetStage();
         groundTiles = new GameObject[3][];
         groundTiles[0] = stage0;
         groundTiles[1] = stage1;

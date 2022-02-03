@@ -8,7 +8,6 @@ public class MenuManager : MonoBehaviour
 {
 
     public static MenuManager inst;
-
     private MenuCamera menuCamera;
     public GameData gameData;
     private int newStage = 0;
@@ -26,12 +25,12 @@ public class MenuManager : MonoBehaviour
     {
         Camera mainCamera = Camera.main;
         menuCamera = mainCamera.GetComponent<MenuCamera>();
-        setScores();
+        SetScores();
     }
 
-    public void startGame(int stage)
+    public void StartGame(int stage)
     {
-        gameData.setStartStage(stage);
+        gameData.SetStartStage(stage);
         SceneManager.LoadScene("Game");
     }
 
@@ -40,13 +39,13 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("ControlMenu");
     }
 
-    private void setScores()
+    private void SetScores()
     {
         //Get data from last run and total data
         var highScore = PlayerPrefs.GetInt("highScore", 0);
         var totalCoins = PlayerPrefs.GetInt("coins", 0);
-        var lastCoins = gameData.getCoins();
-        var lastScore = gameData.getMeters();
+        var lastCoins = gameData.GetCoins();
+        var lastScore = gameData.GetMeters();
         
         //Set text for last score
         if (lastScore == 0)
@@ -61,7 +60,7 @@ public class MenuManager : MonoBehaviour
             scoreText.text = lastScore + "m";
         }
         
-        //Check if its a highscore -> save if it is
+        //Check if its a highScore -> save if it is
         if (lastScore > highScore)
         {
             highScore = lastScore;
@@ -73,7 +72,7 @@ public class MenuManager : MonoBehaviour
             scoreLabel.text = "Score";
         }
         highScoreText.text = highScore + "m";
-        gameData.setHighscore(highScore);
+        gameData.SetHighScore(highScore);
 
         //Add coins to total save and display
         totalCoins += lastCoins;
@@ -82,7 +81,7 @@ public class MenuManager : MonoBehaviour
         
         //Check if a new stage was unlocked
         var stage = PlayerPrefs.GetInt("stage", 1);
-        var reachedStage = gameData.getReachedStage();
+        var reachedStage = gameData.GetReachedStage();
         if (reachedStage > stage)
         {
             stage = reachedStage;
@@ -98,6 +97,6 @@ public class MenuManager : MonoBehaviour
     private void TransitionCamera()
     {
         int moveBy = (newStage-1) * 30;
-        menuCamera.moveBy(moveBy);
+        menuCamera.MoveBy(moveBy);
     }
 }

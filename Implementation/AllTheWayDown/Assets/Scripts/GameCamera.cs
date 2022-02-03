@@ -7,14 +7,13 @@ public class GameCamera : MonoBehaviour
     public Material skybox;
     private float transitionValue;
     private float currentTransitionValue;
-    // Start is called before the first frame update
+    
     void Start()
     {
         transitionValue = 0;
         currentTransitionValue = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (transitionValue > currentTransitionValue)
@@ -25,22 +24,22 @@ public class GameCamera : MonoBehaviour
         }
     }
 
-    public void initiateTransition(int stage)
+    public void InitiateTransition(int stage)
     {
-        float value = getTransitionValue(stage);
+        float value = GetTransitionValue(stage);
         transitionValue = value;
     }
 
-    public void hardTransition(int stage)
+    public void HardTransition(int stage)
     {
-        float value = getTransitionValue(stage);
+        float value = GetTransitionValue(stage);
         transitionValue = value;
         currentTransitionValue = value;
         skybox.SetFloat("_CubemapTransition", transitionValue);
         DynamicGI.UpdateEnvironment();
     }
 
-    private float getTransitionValue(int stage)
+    private float GetTransitionValue(int stage)
     {
         switch (stage)
         {

@@ -42,12 +42,12 @@ public class MenuTouchManager : MonoBehaviour
                 {
                     if (lp.x > fp.x)
                     {
-                        menuCamera.moveBy(-30);
+                        menuCamera.MoveBy(-30);
                         //left swipe
                     }
                     else
                     {
-                        menuCamera.moveBy(30);
+                        menuCamera.MoveBy(30);
                         //right swipe
                     }
                 }

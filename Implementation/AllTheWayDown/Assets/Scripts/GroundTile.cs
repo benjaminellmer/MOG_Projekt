@@ -19,7 +19,7 @@ public class GroundTile : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         GameManager.inst.IncTiles();
-        var stage = GameManager.inst.getStage();
+        var stage = GameManager.inst.GetStage();
         int index;
         do
         {
