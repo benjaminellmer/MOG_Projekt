@@ -6,7 +6,7 @@ public static class ControlSettings
 {
     public static InputMethod GetPreferredInputMethod()
     {
-        return PlayerPrefs.GetString("inputMethod", "gyro") switch
+        return PlayerPrefs.GetString("inputMethod", "acc") switch
         {
             "gyro" => InputMethod.Gyroscope,
             "acc" => InputMethod.Accelerometer,
