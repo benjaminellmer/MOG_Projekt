@@ -3,6 +3,8 @@
 ## Abgabe Struktur
 Da wir recht viele geladene Assets haben finden Sie folgende Ordner in der Abgabe, beim Aufbau des Scripts Ordners haben wir uns an die Struktur von Ihrem Musterprojekt gehalten:
 - Assets/Scripts
+- Assets/Prefabs
+- Assets/Scenes
 - Packages/
 - ProjectSettings/
 
@@ -17,6 +19,9 @@ Seit der Präsentation haben wir nichts mehr geändert ausser ein paar kleinen R
 
 ## Testen auf dem PC
 Sie finden unter Scenes -> Game -> Player die Einstellung debugOnPc, wenn diese aktiviert ist, funktionieren die Desktopsteuerungen, dafür aber die Mobilesteuerungen nicht mehr.
+
+## Bekannte Probleme
+- Auf dem IPhone funktioniert der Hintergrund nur, wenn der darkmode aktiv ist
 
 ## Zusätzliche Annmerkungen
 Da wir die Controls mit dem Gyroscop auf Android nicht mehr zum laufen gebracht haben, haben wir die gyroscop settings ausgegraut.  

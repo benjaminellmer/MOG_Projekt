@@ -1672,7 +1672,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  debugOnPC: 1
+  debugOnPC: 0
 --- !u!135 &2109734098
 SphereCollider:
   m_ObjectHideFlags: 0
