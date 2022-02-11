@@ -22,6 +22,7 @@ Sie finden unter Scenes -> Game -> Player die Einstellung debugOnPc, wenn diese 
 
 ## Bekannte Probleme
 - Auf dem IPhone funktioniert der Hintergrund nur, wenn der darkmode aktiv ist
+- Touch Controls funktionieren nicht auf jedem Handy (working on: IPhone XS, Samsung Galaxy A20)
 
 ## Zusätzliche Annmerkungen
 Da wir die Controls mit dem Gyroscop auf Android nicht mehr zum laufen gebracht haben, haben wir die gyroscop settings ausgegraut.  
