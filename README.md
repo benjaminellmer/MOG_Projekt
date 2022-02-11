@@ -6,7 +6,7 @@ Da wir recht viele geladene Assets haben finden Sie folgende Ordner in der Abgab
 - Packages/
 - ProjectSettings/
 
-Außerdem finden Sie unser gesamtes git repo auf: https://github.com/benjaminellmer/MOG\_Projekt (nach der Bewertung werde ich dieses wieder auf privat stellen)  
+Außerdem finden Sie unser gesamtes git repo auf: https://github.com/benjaminellmer/MOG_Projekt (nach der Bewertung werde ich dieses wieder auf privat stellen)  
 
 ## Teammitglieder und Aufgaben
 - Benjamin Ellmer: Steuerung (desktop, accelerometer, touch, gyro), Stage designing, Control Menu, ...  
